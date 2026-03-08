@@ -3,7 +3,7 @@ use tokio::net::TcpListener;
 use tokio::io::{AsyncWriteExt, AsyncReadExt};
 
 pub async fn run_coordinator() -> tokio::io::Result<()> {
-	let listener = TcpListener::bind("10.10.10.1:8080").await?;
+	let listener = TcpListener::bind("127.0.0.1:8080").await?;
 	println!("Coordinador escuchando en 10.10.10.1:8080");
 
 	loop {

@@ -3,7 +3,7 @@ use tokio::net::TcpStream;
 use tokio::io::{AsyncWriteExt, AsyncReadExt};
 
 pub async fn run_worker() -> tokio::io::Result<()> {
-	let mut stream = TcpStream::connect("10.10.10.1:8080").await?;
+	let mut stream = TcpStream::connect("127.0.0.1:8080").await?;
 	println!("Worker conectado al coordinador");
 
 	//Aqui recibe la tarea
