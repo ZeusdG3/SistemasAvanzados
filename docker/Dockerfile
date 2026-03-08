@@ -3,13 +3,10 @@ FROM rust:latest AS builder
 
 WORKDIR /usr/src/app
 
-# Copiar todo el proyecto
 COPY . .
 
-# Entrar a la carpeta donde está Cargo.toml
 WORKDIR /usr/src/app/rust
 
-# Compilar en modo release
 RUN cargo build --release
 
 
@@ -18,8 +15,11 @@ FROM debian:bookworm-slim
 
 WORKDIR /usr/src/app
 
-# Copiar solo el binario compilado
+# Instalar herramientas de red
+RUN apt-get update && \
+    apt-get install -y iproute2 iputils-ping && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /usr/src/app/rust/target/release/algoritmo_distribuido .
 
-# Comando por defecto
 CMD ["./algoritmo_distribuido"]
