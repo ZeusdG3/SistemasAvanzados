@@ -8,7 +8,8 @@ services:
       dockerfile: docker/Dockerfile
     command: ./algoritmo_distribuido
     networks:
-      - distnet
+      distnet:
+        ipv4_address: 172.28.0.10
 
   worker1:
     build:
@@ -18,7 +19,8 @@ services:
     depends_on:
       - coordinator
     networks:
-      - distnet
+      distnet:
+        ipv4_address: 172.28.0.11
 
   worker2:
     build:
@@ -28,7 +30,8 @@ services:
     depends_on:
       - coordinator
     networks:
-      - distnet
+      distnet:
+        ipv4_address: 172.28.0.12
 
   worker3:
     build:
@@ -38,7 +41,8 @@ services:
     depends_on:
       - coordinator
     networks:
-      - distnet
+      distnet:
+        ipv4_address: 172.28.0.13
 
   worker4:
     build:
@@ -48,8 +52,13 @@ services:
     depends_on:
       - coordinator
     networks:
-      - distnet
+      distnet:
+        ipv4_address: 172.28.0.14
 
 networks:
   distnet:
-    external: true
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
