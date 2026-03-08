@@ -1,64 +1,70 @@
 version: "3.8"
 
 services:
-
   coordinator:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: coordinator
     command: ./algoritmo_distribuido
     networks:
-      distnet:
-        ipv4_address: 172.28.0.10
+      - distnet
+    cap_add:
+      - NET_ADMIN
 
   worker1:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: worker1
     command: ./algoritmo_distribuido worker
-    depends_on:
-      - coordinator
     networks:
-      distnet:
-        ipv4_address: 172.28.0.11
+      - distnet
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - WORKER_ID=1
 
   worker2:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: worker2
     command: ./algoritmo_distribuido worker
-    depends_on:
-      - coordinator
     networks:
-      distnet:
-        ipv4_address: 172.28.0.12
+      - distnet
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - WORKER_ID=2
 
   worker3:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: worker3
     command: ./algoritmo_distribuido worker
-    depends_on:
-      - coordinator
     networks:
-      distnet:
-        ipv4_address: 172.28.0.13
+      - distnet
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - WORKER_ID=3
 
   worker4:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: worker4
     command: ./algoritmo_distribuido worker
-    depends_on:
-      - coordinator
     networks:
-      distnet:
-        ipv4_address: 172.28.0.14
+      - distnet
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - WORKER_ID=4
 
 networks:
   distnet:
+    name: distnet
     driver: bridge
-    internal: true
-    ipam:
-      config:
-        - subnet: 172.28.0.0/16
