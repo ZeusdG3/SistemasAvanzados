@@ -12,7 +12,7 @@ RUN cargo build --release
 # Imagen final
 FROM debian:bookworm-slim
 
-# Instalar iproute2 para tc y netcat-openbsd para healthchecks (opcional)
+# Instalar iproute2 para tc y netcat-openbsd
 RUN apt-get update && apt-get install -y iproute2 netcat-openbsd && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
