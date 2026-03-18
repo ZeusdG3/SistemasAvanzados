@@ -17,7 +17,7 @@ pub async fn run_worker() -> tokio::io::Result<()> {
                 // connect_and_work retorna Ok cuando recibe NO_MORE_TASKS o cierre normal
                 println!("Worker sin tareas, esperando y reconectando...");
                 tokio::time::sleep(Duration::from_secs(5)).await;
-                connect_errors = 0; // Reiniciamos contador de errores
+                connect_errors = 0;
             }
             Err(e) => {
                 eprintln!("Error en worker: {}", e);
@@ -90,8 +90,8 @@ async fn connect_and_work() -> tokio::io::Result<()> {
         // Medir tiempo de envío
         let send_start = std::time::Instant::now();
 
-        // Bloque de envío (con timeout de 20s como ajustaste)
-        if let Err(e) = timeout(Duration::from_secs(20), writer.write_all(serialized.as_bytes())).await {
+        // Bloque de envío (con timeout de 30)
+        if let Err(e) = timeout(Duration::from_secs(30), writer.write_all(serialized.as_bytes())).await {
             eprintln!("Timeout enviando resultado de tarea {}: {}", task.id, e);
             return Err(tokio::io::Error::new(tokio::io::ErrorKind::TimedOut, "Timeout enviando resultado"));
         }

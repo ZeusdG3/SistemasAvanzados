@@ -206,11 +206,11 @@ async fn assemble_image(
         }
     }
 
-    img.save("/output/mandelbrot_distributed.png").map_err(|e| {
+    img.save("/output/mandelbrot.png").map_err(|e| {
         eprintln!("Error guardando imagen: {}", e);
         tokio::io::Error::new(tokio::io::ErrorKind::Other, e)
     })?;
-    println!("Imagen guardada como '/output/mandelbrot_distributed.png'");
+    println!("Imagen guardada como '/output/mandelbrot.png'");
 
     Ok(())
 }

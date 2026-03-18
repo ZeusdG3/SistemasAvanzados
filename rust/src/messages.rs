@@ -20,5 +20,5 @@ pub struct ResultMsg {
     pub id: u32,
     pub y_start: u32,
     pub y_end: u32,
-    pub data: Vec<u8>, // Datos RGB en orden de filas (y_start..y_end), cada píxel 3 bytes
+    pub data: Vec<u8>,
 }
