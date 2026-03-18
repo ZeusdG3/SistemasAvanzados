@@ -9,13 +9,13 @@ use image::{ImageBuffer, Rgb};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::process;
 
-// Parámetros globales (tomados del main original)
+// Parámetros globales
 const WIDTH: u32 = 7680;
 const HEIGHT: u32 = 4320;
 const MAX_ITER: u32 = 500;
 const SUPERSAMPLING: u32 = 1;
 
-// Región a renderizar (misma que en el original)
+// Región a renderizar
 const CENTER_RE: f64 = -0.4049987;
 const CENTER_IM: f64 = -0.5903320;
 const ZOOM: f64 = 10.0;
