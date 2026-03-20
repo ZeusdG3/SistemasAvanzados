@@ -93,8 +93,8 @@ async fn connect_and_work() -> tokio::io::Result<()> {
         // Medir tiempo de envío
         let send_start = std::time::Instant::now();
 
-        // Bloque de envío (con timeout de 30)
-        if let Err(e) = timeout(Duration::from_secs(30), writer.write_all(serialized.as_bytes())).await {
+        // Bloque de envío (con timeout de 120)
+        if let Err(e) = timeout(Duration::from_secs(120), writer.write_all(serialized.as_bytes())).await {
             eprintln!("Timeout enviando resultado de tarea {}: {}", task.id, e);
             return Err(tokio::io::Error::new(tokio::io::ErrorKind::TimedOut, "Timeout enviando resultado"));
         }
